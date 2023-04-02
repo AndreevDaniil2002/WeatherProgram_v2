@@ -12,10 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class Settengss extends AppCompatActivity {
-    @SuppressLint("UseSwitchCompatOrMaterialCode")
+
     Switch tSwitch, wSwitch, pSwitch;
     String temp = "Off", wind = "Off", press = "Off";
-    Button set;
+    Button set, auth;
     String t, w, p;
 
 
@@ -29,6 +29,7 @@ public class Settengss extends AppCompatActivity {
         ed.putBoolean("pswitchState", pSwitch.isChecked());
         ed.apply();
     }
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +38,7 @@ public class Settengss extends AppCompatActivity {
         wSwitch = findViewById(R.id.switchWind);
         pSwitch = findViewById(R.id.switchPressure);
         set = findViewById(R.id.Set);
+        auth = findViewById(R.id.Authorization);
 
         SharedPreferences prefs = getSharedPreferences("test", Context.MODE_PRIVATE);
         boolean tswitchState = prefs.getBoolean("tswitchState", false);
@@ -94,6 +96,10 @@ public class Settengss extends AppCompatActivity {
             intent.putExtra("Press", press);
             setResult(RESULT_OK, intent);
             finish();
+        });
+        auth.setOnClickListener(view -> {
+            Intent intent = new Intent(this, Authoriztion.class);
+            startActivity(intent);
         });
 
     }
